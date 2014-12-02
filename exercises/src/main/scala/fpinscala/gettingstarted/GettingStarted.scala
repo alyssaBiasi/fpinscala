@@ -165,7 +165,8 @@ object PolymorphicFunctions {
 
   // Exercise 4: Implement `uncurry`
   def uncurry[A,B,C](f: A => B => C): (A, B) => C =
-    ???
+    (a, b) => f(a)(b)
+    //(a: A, b: B) => f(a)(b)
 
   /*
   NB: There is a method on the `Function` object in the standard library,
