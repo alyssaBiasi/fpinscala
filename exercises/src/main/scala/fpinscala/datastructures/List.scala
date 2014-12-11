@@ -70,6 +70,11 @@ object List { // `List` companion object. Contains functions for creating and wo
     case _ => l
   }
 
+  def dropWhileCurried[A](l: List[A])(f: A => Boolean): List[A] = l match {
+    case Cons(h, t) if f(h) => dropWhileCurried(t)(f)
+    case _ => l
+  }
+
   def init[A](l: List[A]): List[A] = l match {
     case Nil => Nil
     case Cons(_, Nil) => Nil
