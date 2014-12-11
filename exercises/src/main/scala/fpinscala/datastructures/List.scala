@@ -70,7 +70,23 @@ object List { // `List` companion object. Contains functions for creating and wo
     case _ => l
   }
 
-  def init[A](l: List[A]): List[A] = sys.error("todo")
+  def init[A](l: List[A]): List[A] = l match {
+    case Nil => Nil
+    case Cons(_, Nil) => Nil
+    case Cons(h, t) => Cons(h, init(t))
+  }
+
+  def init2[A](l: List[A]): List[A] = {
+    import collection.mutable.ListBuffer
+    val buf = new ListBuffer[A]
+    @annotation.tailrec
+    def go(cur: List[A]): List[A] = cur match {
+      case Nil => sys.error("init of empty list")
+      case Cons(_,Nil) => List(buf.toList: _*)
+      case Cons(h,t) => buf += h; go(t)
+    }
+    go(l)
+  }
 
   def length[A](l: List[A]): Int = sys.error("todo")
 
