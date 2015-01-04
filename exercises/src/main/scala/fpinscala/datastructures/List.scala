@@ -46,6 +46,14 @@ object List { // `List` companion object. Contains functions for creating and wo
   def product2(ns: List[Double]) = 
     foldRight(ns, 1.0)(_ * _) // `_ * _` is more concise notation for `(x,y) => x * y`; see sidebar
 
+  def sumLeft(ns: List[Int]): Int =
+    foldLeft(ns, 0)(_ + _)
+
+  def productLeft(ns: List[Int]): Double  =
+    foldLeft(ns, 1.0)(_ * _)
+
+  def lengthLeft(ns: List[Int]): Int =
+    foldLeft(ns, 0)((acc, y) => acc + 1)
 
   def tail[A](l: List[A]): List[A] = l match {
     case Nil => Nil // sys.error("Tail of Nil list")
